@@ -1,0 +1,16 @@
+from django.db import models
+from django.contrib.auth.models import User
+from .validators import validate_cpf
+
+# Create your models here.
+class MyUser(User):
+    cpf = models.CharField(
+        max_length = 14,
+      #  validators=[validate_cpf]
+    )
+    following = models.ManyToManyField(
+        'self', 
+        related_name='followers',
+        symmetrical=False,
+        blank=True,
+    )
